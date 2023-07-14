@@ -1,0 +1,1 @@
+# nms-community-templates
