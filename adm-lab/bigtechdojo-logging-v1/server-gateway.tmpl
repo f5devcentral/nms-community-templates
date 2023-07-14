@@ -1,0 +1,25 @@
+{{ := .}}
+{{ := .Data.V1}}
+
+{{ := len .Args}}
+
+{{if eq  0}}
+    {{fail "base template did not pass in the required argument"}}
+{{end}}
+
+{{  := index .Args 0}}
+{{  := index .servers }}
+
+{{  := .customExtensions }}
+
+{{if  }}
+# created by: bigtechdojo custom template
+    {{ := .access_log_options.args}}
+    {{ := .error_log_options.args}}
+    {{if  }}
+       access_log {{}};
+    {{end}}
+    {{if  }}
+       error_log {{}};
+    {{end}}
+{{end}}

@@ -1,0 +1,82 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "customExtensions": {
+                    "type": ["object","null"],
+                    "properties": {
+                        "access_log_options": {
+                            "type": "object",
+                            "title": "HTTP block access_log directive",
+                            "description": "For example: syslog:server=10.1.1.4:514,facility=local7,tag=nginx,severity=info",
+                            "additionalProperties": false,
+                            "properties": {
+                                "args": {
+                                    "type": "string",
+                                    "title": "Global Access Log arguments",
+                                    "description": "Access Log description"
+                                }
+                            }
+                        },
+                        "error_log_options": {
+                            "type": "object",
+                            "title": "HTTP block error_log directive",
+                            "description": "For example: syslog:server=10.1.1.4:514,facility=local7,tag=nginx,severity=error",
+                            "additionalProperties": false,
+                            "properties": {
+                                "args": {
+                                    "type": "string",
+                                    "title": "Global Error Log arguments",
+                                    "description": "Error Log description"
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "customExtensions": {
+                                "type": "object",
+                                "properties": {
+                                    "access_log_options": {
+                                        "type": "object",
+                                        "title": "Server block access_log directive",
+                                        "description": "For example: syslog:server=10.1.1.4:514,facility=local7,tag=nginx,severity=info",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "args": {
+                                                "type": "string",
+                                                "title": "Local Access Log arguments",
+                                                "description": "Access Log description"
+                                            }
+                                        }
+                                    },
+                                    "error_log_options": {
+                                        "type": "object",
+                                        "title": "Server block error_log directive",
+                                        "description": "For example: syslog:server=10.1.1.4:514,facility=local7,tag=nginx,severity=error",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "args": {
+                                                "type": "string",
+                                                "title": "Local Error Log arguments",
+                                                "description": "Error Log description"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": []
+}

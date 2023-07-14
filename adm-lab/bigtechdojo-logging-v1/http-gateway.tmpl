@@ -1,0 +1,18 @@
+{{$input := .}}
+{{$gwData := .Data.V1}}
+
+{{$gce := $gwData.customExtensions}}
+
+{{if $gce }}
+    {{$user_input := $gce.access_log_options.args}}
+    {{$user_input2 := $gce.error_log_options.args}}
+    {{if $user_input }}
+       # created by: bigtechdojo custom template
+       access_log {{$user_input}};
+    {{end}}
+    {{if $user_input2 }}
+       # created by: bigtechdojo custom template
+       error_log {{$user_input2}};
+    {{end}}
+{{end}}
+
