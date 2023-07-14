@@ -1,25 +1,25 @@
-{{ := .}}
-{{ := .Data.V1}}
+{{$input := .}}
+{{$gwData := .Data.V1}}
 
-{{ := len .Args}}
+{{$argsLen := len $input.Args}}
 
-{{if eq  0}}
+{{if eq $argsLen 0}}
     {{fail "base template did not pass in the required argument"}}
 {{end}}
 
-{{  := index .Args 0}}
-{{  := index .servers }}
+{{ $serverIndex := index $input.Args 0}}
+{{ $server := index $gwData.servers $serverIndex}}
 
-{{  := .customExtensions }}
+{{ $sce := $server.customExtensions }}
 
-{{if  }}
+{{if $sce }}
 # created by: bigtechdojo custom template
-    {{ := .access_log_options.args}}
-    {{ := .error_log_options.args}}
-    {{if  }}
-       access_log {{}};
+    {{$user_input := $sce.access_log_options.args}}
+    {{$user_input2 := $sce.error_log_options.args}}
+    {{if $user_input }}
+       access_log {{$user_input}};
     {{end}}
-    {{if  }}
-       error_log {{}};
+    {{if $user_input2 }}
+       error_log {{$user_input2}};
     {{end}}
 {{end}}
