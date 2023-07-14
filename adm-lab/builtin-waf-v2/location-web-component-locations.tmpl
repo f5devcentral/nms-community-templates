@@ -1,0 +1,19 @@
+{{/* Copyright (C) F5 Networks, Inc. 2023 */}} 
+{{/* All rights reserved. */}} 
+{{/* No part of the software may be reproduced or transmitted in any */}} 
+{{/* form or by any means, electronic or mechanical, for any purpose, */}} 
+{{/* without express written permission of F5 Networks, Inc. */}} 
+{{$input := .}}
+{{$compData := .Data.V1}}
+{{$topLevelCe := $compData.customExtensions}}
+
+{{if and $topLevelCe $topLevelCe.appProtect}}
+    {{if $topLevelCe.appProtect.securityPolicy}}
+	    app_protect_enable on;
+	    app_protect_policy_file "/etc/nms/{{$topLevelCe.appProtect.securityPolicy}}.tgz";
+        {{if $topLevelCe.appProtect.loggingPolicy}}
+	        app_protect_security_log_enable on;
+	        app_protect_security_log "/etc/nms/{{$topLevelCe.appProtect.loggingPolicy}}.tgz" {{$topLevelCe.appProtect.loggingLocation}};
+        {{end}}
+    {{end}}
+{{end}}

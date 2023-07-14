@@ -1,0 +1,49 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "customExtensions": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "properties": {
+                        "appProtect": {
+                            "type": "object",
+                            "title": "App Protect",
+                            "description": "App Protect policies to be used by components. Allows setting security and logging policies. See https://docs.nginx.com/nginx-app-protect-waf/configuration-guide/configuration/ for instructions configuring policies.",
+                            "properties": {
+                                "securityPolicy": {
+                                    "type": "string",
+                                    "title": "Security Policy",
+                                    "description": "Sets the security policy to be applied to this component.",
+                                    "enum": ["NginxDefaultPolicy", "NginxDefaultPolicyTransparent","NginxStrictPolicy"],
+                                    "examples": "NginxDefaultPolicy"
+                                },
+                                "loggingPolicy": {
+                                    "type": "string",
+                                    "title": "Logging Policy",
+                                    "description": "Sets the logging policy to be applied to this component.",
+                                    "enum": ["secops_dashboard","log_all", "log_blocked", "log_illegal"],
+                                    "examples": "secops_dashboard"
+                                },
+                                "loggingLocation": {
+                                    "type": "string",
+                                    "title": "Logging Location",
+                                    "description": "Sets the logging location.",
+                                    "enum": ["/var/log/app_protect/security.log", "syslog:server=127.0.0.1:514"],
+                                    "examples": "syslog:server=127.0.0.1:514"
+                                }
+                            },
+                            "required": ["securityPolicy"]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": []
+}

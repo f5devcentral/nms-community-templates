@@ -1,0 +1,21 @@
+{{/* Copyright (C) F5 Networks, Inc. 2023 */}} 
+{{/* All rights reserved. */}} 
+{{/* No part of the software may be reproduced or transmitted in any */}} 
+{{/* form or by any means, electronic or mechanical, for any purpose, */}} 
+{{/* without express written permission of F5 Networks, Inc. */}} 
+{{/*
+    Invoked from Instance Group base template. Directives specified here go in to
+    the "main" context.
+*/}}
+
+{{$instGroupData := .Data.V1}}
+{{$wafLocationBlockFound := false}}
+
+{{range $instGroupData.gatewayHttpConfigs}}
+    {{$wafLocationBlockFound = contains "app_protect_enable" .renderedNGINXConfig}}
+    {{if eq $wafLocationBlockFound true}}
+        # builtin-waf-v1/main-instance-group.tmpl
+        load_module modules/ngx_http_app_protect_module.so;
+        {{break}}
+    {{end}}
+{{end}}
