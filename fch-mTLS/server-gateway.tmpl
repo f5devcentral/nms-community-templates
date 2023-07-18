@@ -1,0 +1,33 @@
+{{/* For demo and PoC only */}} 
+{{/* All rights reserved. */}} 
+{{/* Fouad Chmainy  */}} 
+
+{{$input := .}}
+{{$gwData := .Data.V1}}
+{{$argsLen := len $input.Args}}
+{{if lt $argsLen 1}}
+    {{fail "base template did not pass in the required arguments"}}
+{{end}}
+{{$serverIndex := index $input.Args 0}}
+{{$server := index $gwData.servers $serverIndex}}
+
+
+{{$derivedEnabled := "off"}}
+{{$derivedCaFile := "ca.crt"}}
+
+{{$uriCe := $server.customExtensions}}
+
+{{/* Enable mTLS - defaults to on */}} 
+{{if and $uriCe $uriCe.mTLS $uriCe.mTLS.mTLSEnable}}
+    {{$derivedEnabled = $uriCe.mTLS.mTLSEnable}}
+{{end}}
+
+{{/* Pointer to the CA Certificate file to Authenticate Client certificates - defaults to /etc/ssl/certs/ca.crt */}}
+{{if and $uriCe $uriCe.mTLS $uriCe.mTLS.clientCertFile}}
+    {{$derivedCaFile = $uriCe.mTLS.clientCertFile}}
+{{end}}
+
+{{if eq $derivedEnabled "on"}}
+    ssl_client_certificate /etc/ssl/certs/{{$derivedCaFile}};
+{{end}}
+

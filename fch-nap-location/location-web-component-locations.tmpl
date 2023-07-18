@@ -1,0 +1,37 @@
+{{/* For demo and PoC only */}} 
+{{/* All rights reserved. */}} 
+{{/* Fouad Chmainy  */}} 
+
+{{$input := .}}
+{{$compData := .Data.V1}}
+{{$argsLen := len $input.Args}}
+{{if lt $argsLen 1}}
+    {{fail "base template did not pass in the required arguments"}}
+{{end}}
+
+{{$locationIndex := index $input.Args 0}}
+{{$location := index $compData.locations $locationIndex}}
+
+{{/* By Default, NAP is disabled on all locations */}}
+{{$derivedEnabled := "off"}}
+{{$derivedPolicy := "NginxDefaultPolicy"}}
+
+{{$bce := $location.customExtensions}}
+
+
+{{if and $bce $bce.NAPSettings $bce.NAPSettings.NAPEnable}}
+    {{$derivedEnabled = $bce.NAPSettings.NAPEnable}}
+{{end}}
+
+
+{{if and $bce $bce.NAPSettings $bce.NAPSettings.NAPName}}
+    {{$derivedPolicy = $bce.NAPSettings.NAPName}}
+{{end}}
+
+{{if eq $derivedEnabled "on"}}
+	app_protect_enable on;
+	app_protect_policy_file "/etc/nms/{{$derivedPolicy}}.tgz";
+	app_protect_security_log_enable on;
+	app_protect_security_log "/etc/nms/secops_dashboard.tgz" syslog:server=127.0.0.1:514;
+{{end}}
+

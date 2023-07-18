@@ -1,0 +1,53 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "locations": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "customExtensions": {
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
+                                "properties": {
+                                    "NAPSettings": {
+                                        "type": "object",
+                                        "title": "Enforce a NAP Policy on the Web App location",
+                                        "description": "Enforce a NAP Policy on the Web App location",
+                                        "properties": {
+                                            "NAPEnable": {
+                                                "title": "Enables NAP on the Location",
+                                                "description": "On/Off to enable NAP Policy on the path (default = on)",
+                                                "type": "string",
+		    	                        "enum": [
+                         				"off",
+                    					"on"
+                  					],
+                  				"examples": [
+                    					"on",
+                    					"off"
+                  					]
+                                            },
+                                            "NAPName": {
+                                                "type": "string",
+                                                "title": "NAP Policy name",
+                                                "description": "Name of App Protect Policy as they are listed on /ui/app-protect (default = NginxDefaultPolicy)",
+                                                "examples":["NginxDefaultPolicy", "NginxStrictPolicy"]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

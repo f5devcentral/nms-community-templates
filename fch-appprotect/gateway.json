@@ -1,0 +1,61 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "servers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "customExtensions": {
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
+                                "properties": {
+                                    "appProtect": {
+                                        "type": "object",
+                                        "title": "NAP Settings",
+                                        "description": "App and API Protection settings.",
+                                        "properties": {
+                                            "appProtectEnable":{
+                                                "type": "string",
+                                                "title": "app_protect_enable",
+                                                "description": "Enables NGINX App Protect on the Application.",
+                                                "enum": ["off", "on"],
+                                                "examples":["on","off"]
+                                            },
+                                            "policyFile": {
+                                                "type": "string",
+                                                "title": "app_protect_policy_file",
+                                                "description": "Path to the App Protect Policy File.",
+                                                "examples":["/etc/app_protect/conf/NginxDefaultPolicy.json"]
+                                            },
+                                            "appProtectSecurityLogEnable":{
+                                                "type": "string",
+                                                "title": "app_protect_security_log_enable",
+                                                "description": "Enables the logging capability",
+                                                "enum": ["off", "on"],
+                                                "examples":["on","off"]
+                                            },
+                                            "appProtectSecurityLog": {
+                                                "type": "string",
+                                                "title": "app_protect_security_log",
+                                                "description": "This is where the remote logger is defined in terms of: logging options (defined in the referenced file), log server IP, log server port.",
+                                                "examples": ["127.0.0.1:514"]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": []
+}

@@ -1,0 +1,29 @@
+{{/* For demo and PoC only */}} 
+{{/* All rights reserved. */}} 
+{{/* Fouad Chmainy  */}} 
+
+{{$input := .}}
+{{$compData := .Data.V1}}
+{{$argsLen := len $input.Args}}
+{{if lt $argsLen 1}}
+    {{fail "base template did not pass in the required arguments"}}
+{{end}}
+
+{{$locationIndex := index $input.Args 0}}
+{{$location := index $compData.locations $locationIndex}}
+
+{{$derivedEnabled := "on"}}
+{{$bce := $location.customExtensions}}
+
+
+{{if and $bce $bce.mTlsSettings $bce.mTlsSettings.mTlsEnable}}
+    {{$derivedEnabled = $bce.mTlsSettings.mTlsEnable}}
+{{end}}
+
+
+{{if eq $derivedEnabled "on"}}
+       if ($ssl_client_verify != SUCCESS) {
+          return 403;
+       }
+{{end}}
+
