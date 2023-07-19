@@ -1,0 +1,47 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "locations": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "customExtensions": {
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
+                                "properties": {
+                                    "mTlsSettings": {
+                                        "type": "object",
+                                        "title": "Enables mTLS on the location",
+                                        "description": "Enables Client certificate verify.",
+                                        "properties": {
+                                            "mTlsEnable": {
+                                                "title": "Enables mTLS on the Location",
+                                                "description": "If the ssl_client_verify is not successful, it will return a 403",
+                                                "type": "string",
+		    	                        "enum": [
+                         				"off",
+                    					"on"
+                  					],
+                  				"examples": [
+                    					"on",
+                    					"off"
+                  					]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "customExtensions": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "properties": {
+                                    "NAPSettings": {
+                                        "type": "object",
+                                        "title": "Enforce a NAP Policy at the top level of the gateway",
+                                        "description": "App and API Protection settings.",
+                                        "properties": {
+                                            "NAPEnable":{
+                                                "type": "string",
+                                                "title": "Enables NAP on the URI",
+                                                "description": "Enables NGINX App Protect globally on the Application.",
+                                                "enum": ["off", "on"],
+                                                "examples":["on","off"]
+                                            },
+                                            "NAPName": {
+                                                "type": "string",
+                                                "title": "NAP Policy name",
+                                                "description": "Name of App Protect Policy as they are listed on /ui/app-protect (default = NginxDefaultPolicy)",
+                                                "examples":["NginxDefaultPolicy", "NginxStrictPolicy"]
+                                            }
+                                        }
+                                    }
+
+                    }
+                }
+
+            }
+        }
+    },
+    "required": []
+}

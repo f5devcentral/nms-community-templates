@@ -1,0 +1,7 @@
+ssl_client_certificate /etc/ssl/certs/ca.crt;
+ssl_session_cache shared:SSL:10m;
+ssl_verify_client on;
+proxy_connect_timeout 1s;
+          
+mqtt_rewrite_buffer_size 16k;
+mqtt_set_connect clientid $ssl_client_serial;

@@ -1,0 +1,15 @@
+{{/* Copyright (C) F5 Networks, Inc. 2023 */}} 
+{{/* All rights reserved. */}} 
+{{/* No part of the software may be reproduced or transmitted in any */}} 
+{{/* form or by any means, electronic or mechanical, for any purpose, */}} 
+{{/* without express written permission of F5 Networks, Inc. */}} 
+
+# Server Redirect from 80 to 443
+
+
+server { 
+    listen 80 default_server;
+    server_name _;
+    return 301 https://$host$request_uri;
+}
+ 

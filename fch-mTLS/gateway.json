@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "v1": {
+            "type": "object",
+            "properties": {
+                "servers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "customExtensions": {
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
+                                "properties": {
+			        	"mTLS": {
+                                       		"type": "object",
+                                       		"title": "mTLS Settings",
+                                     		"description": "Client Certificate Authentication settings.",
+                            			"properties": {
+                                			"mTLSEnable":{
+                                    				"type": "string",
+                                    				"title": "MTLS Enable",
+                                    				"description": "Enables Client Certificates Authentication on the Application.",
+                                    				"enum": ["off", "on"],
+                                    				"examples":["on","off"]
+                                			},
+                                			"clientCertFile": {
+                                    				"type": "string",
+                                    				"title": "Client Certificate file name",
+                                    				"description": "Name of the CA certificate for Client Authentication. Should be located at: /etc/ssl/certs/ on each dataplanes.",
+                                    				"examples":["ca.crt"]
+                                			}
+                            			}
+                        		}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    },
+    "required": []
+}
