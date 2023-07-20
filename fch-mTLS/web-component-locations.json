@@ -16,23 +16,24 @@
                                     "null"
                                 ],
                                 "properties": {
-                                    "mTlsSettings": {
+                                    "mTLS": {
                                         "type": "object",
-                                        "title": "Enables mTLS on the location",
-                                        "description": "Enables Client certificate verify.",
+                                        "title": "mTLS Settings",
+                                        "description": "Client Certificate Authentication settings.",
+                                        "required": ["mTLSEnable"],
                                         "properties": {
-                                            "mTlsEnable": {
-                                                "title": "Enables mTLS on the Location",
-                                                "description": "If the ssl_client_verify is not successful, it will return a 403",
+                                            "mTLSEnable": {
                                                 "type": "string",
-		    	                        "enum": [
-                         				"off",
-                    					"on"
-                  					],
-                  				"examples": [
-                    					"on",
-                    					"off"
-                  					]
+                                                "title": "MTLS Enable",
+                                                "description": "Enables Client Certificates Authentication on the Application.",
+                                                "enum": [
+                                                    "off",
+                                                    "on"
+                                                ],
+                                                "examples": [
+                                                    "on",
+                                                    "off"
+                                                ]
                                             }
                                         }
                                     }
@@ -43,5 +44,6 @@
                 }
             }
         }
-    }
+    },
+    "required": []
 }

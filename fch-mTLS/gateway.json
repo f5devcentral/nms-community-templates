@@ -16,26 +16,34 @@
                                     "null"
                                 ],
                                 "properties": {
-			        	"mTLS": {
-                                       		"type": "object",
-                                       		"title": "mTLS Settings",
-                                     		"description": "Client Certificate Authentication settings.",
-                            			"properties": {
-                                			"mTLSEnable":{
-                                    				"type": "string",
-                                    				"title": "MTLS Enable",
-                                    				"description": "Enables Client Certificates Authentication on the Application.",
-                                    				"enum": ["off", "on"],
-                                    				"examples":["on","off"]
-                                			},
-                                			"clientCertFile": {
-                                    				"type": "string",
-                                    				"title": "Client Certificate file name",
-                                    				"description": "Name of the CA certificate for Client Authentication. Should be located at: /etc/ssl/certs/ on each dataplanes.",
-                                    				"examples":["ca.crt"]
-                                			}
-                            			}
-                        		}
+                                    "mTLS": {
+                                        "type": "object",
+                                        "title": "mTLS Settings",
+                                        "description": "Client Certificate Authentication settings.",
+                                        "required": ["mTLSEnable"],
+                                        "properties": {
+                                            "mTLSEnable": {
+                                                "type": "string",
+                                                "title": "MTLS Enable",
+                                                "description": "Enables Client Certificates Authentication on the Application.",
+                                                "enum": [
+                                                    "off",
+                                                    "on"
+                                                ],
+                                                "examples": [
+                                                    "on",
+                                                    "off"
+                                                ]
+                                            },
+                                            "clientCertFile": {
+                                                "type": "string",
+                                                "title": "Client Certificate file name",
+                                                "description": "Name of the CA certificate for Client Authentication. Should be located at: /etc/ssl/certs/ on each dataplanes.",
+                                                "examples": [
+                                                    "ca.crt"
+                                                ]
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -43,6 +51,7 @@
                     }
                 }
             }
+        }
     },
     "required": []
 }

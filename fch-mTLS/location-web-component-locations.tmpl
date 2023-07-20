@@ -1,6 +1,6 @@
-{{/* For demo and PoC only */}} 
-{{/* All rights reserved. */}} 
-{{/* Fouad Chmainy  */}} 
+{{/* For demo and PoC only */}}
+{{/* All rights reserved. */}}
+{{/* Fouad Chmainy  */}}
 
 {{$input := .}}
 {{$compData := .Data.V1}}
@@ -12,18 +12,10 @@
 {{$locationIndex := index $input.Args 0}}
 {{$location := index $compData.locations $locationIndex}}
 
-{{$derivedEnabled := "on"}}
 {{$bce := $location.customExtensions}}
 
-
-{{if and $bce $bce.mTlsSettings $bce.mTlsSettings.mTlsEnable}}
-    {{$derivedEnabled = $bce.mTlsSettings.mTlsEnable}}
+{{if and $bce $bce.mTLS (eq $bce.mTLS.mTLSEnable "on")}}
+    if ($ssl_client_verify != SUCCESS) {
+        return 403;
+    }
 {{end}}
-
-
-{{if eq $derivedEnabled "on"}}
-       if ($ssl_client_verify != SUCCESS) {
-          return 403;
-       }
-{{end}}
-

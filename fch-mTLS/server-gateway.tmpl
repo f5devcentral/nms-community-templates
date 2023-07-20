@@ -1,6 +1,6 @@
-{{/* For demo and PoC only */}} 
-{{/* All rights reserved. */}} 
-{{/* Fouad Chmainy  */}} 
+{{/* For demo and PoC only */}}
+{{/* All rights reserved. */}}
+{{/* Fouad Chmainy  */}}
 
 {{$input := .}}
 {{$gwData := .Data.V1}}
@@ -10,24 +10,17 @@
 {{end}}
 {{$serverIndex := index $input.Args 0}}
 {{$server := index $gwData.servers $serverIndex}}
-
-
-{{$derivedEnabled := "off"}}
-{{$derivedCaFile := "ca.crt"}}
-
 {{$uriCe := $server.customExtensions}}
 
-{{/* Enable mTLS - defaults to on */}} 
-{{if and $uriCe $uriCe.mTLS $uriCe.mTLS.mTLSEnable}}
-    {{$derivedEnabled = $uriCe.mTLS.mTLSEnable}}
-{{end}}
+{{/* mTLS settings are presernt and set to "on"*/}}
+{{if and $uriCe $uriCe.mTLS (eq $uriCe.mTLS.mTLSEnable "on")}}
+    {{/* Default certificate. Used when mTLS is "on" but certificate is not specified*/}}
+    {{$cert := "ca.crt"}}
+    {{$mTLS := $uriCe.mTLS}}
 
-{{/* Pointer to the CA Certificate file to Authenticate Client certificates - defaults to /etc/ssl/certs/ca.crt */}}
-{{if and $uriCe $uriCe.mTLS $uriCe.mTLS.clientCertFile}}
-    {{$derivedCaFile = $uriCe.mTLS.clientCertFile}}
+    {{/* Certificate is specified, override the default */}}
+    {{if $mTLS.clientCertFile}}
+        {{$cert = $mTLS.clientCertFile}}
+    {{end}}
+    ssl_client_certificate /etc/ssl/certs/{{$cert}};
 {{end}}
-
-{{if eq $derivedEnabled "on"}}
-    ssl_client_certificate /etc/ssl/certs/{{$derivedCaFile}};
-{{end}}
-
